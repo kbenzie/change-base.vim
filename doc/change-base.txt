@@ -1,0 +1,267 @@
+*change-base.txt*	For Vim version 7.4	Last change: 2016 June 5
+
+Author: Kenneth Benzie <k.benzie83@gmail.com>
+License: MIT
+
+==============================================================================
+INTRODUCTION                                                 *change-base-intro*
+
+A vim plugin to change the base of integer literals.
+
+It provides a set of functions and mappings, outlined below, to quickly
+translate between base systems in a form commonly used by programming
+languages.
+
+|change-base-functions|
+|change-base-mappings|
+|change-base-options|
+|change-base-license|
+
+                                                      *change-base-base-systems*
+Base system representations supported by this plugin are.
+
+    Hexadecimal (lower case): `0x2a`
+    Hexadecimal (upper case): `0X2A`
+                       Octal: `052`
+                     Decimal: `42`
+         Binary (lower case): `0b101010`
+         Binary (upper case): `0B101010`
+
+==============================================================================
+FUNCTIONS                                                *change-base-functions*
+
+                                                                          *:Hex*
+The |:Hex| function takes a valid integer representation of any representation
+specified in |change-base-base-systems| and changes it to the lower case
+hexadecimal base 16 form. |:Hex| is most useful when used in combination with
+pasting from the expression register |i_CTRL-R_=| in insert mode. Similar to
+|:HEX|. E.g.
+
+    CTRL-R=Hex(42)<CR>
+
+                                                                          *:HEX*
+The |:HEX| function takes a valid integer representation of any representation
+specified in |change-base-base-systems| and changes it to the upper case
+hexadecimal base 16 form. |:HEX| is most useful when used in combination with
+pasting from the expression register |i_CTRL-R_=| in insert mode. Similar to
+|:Hex|. E.g.
+
+    CTRL-R=HEX(42)<CR>
+
+                                                                          *:Oct*
+The |:Oct| function takes a valid integer representation of any representation
+specified in |change-base-base-systems| and changes it to the octal base 8
+form. |:Oct| is most useful when used in combination with pasting from the
+expression register |i_CTRL-R_=| in insert mode.
+
+    CTRL-R=Oct(42)<CR>
+
+                                                                          *:Dec*
+The |:Oct| function takes a valid integer representation of any representation
+specified in |change-base-base-systems| and changes it to the decimal base 10
+form. |:Dec| is most useful when used in combination with pasting from the
+expression register |i_CTRL-R_=| in insert mode.
+
+    CTRL-R=Dec(42)<CR>
+
+                                                                          *:Bin*
+The |:Bin| function takes a valid integer representation of any representation
+specified in |change-base-base-systems| and changes it to the lower case
+binary base 2 form. |:Bin| is most useful when used in combination with
+pasting from the expression register |i_CTRL-R_=| in insert mode. Similar to
+|:BIN|. E.g.
+
+    CTRL-R=Bin(42)<CR>
+
+                                                                          *:BIN*
+The |:BIN| function takes a valid integer representation of any representation
+specified in |change-base-base-systems| and changes it to the upper case
+binary base 2 form. |:BIN| is most useful when used in combination with
+pasting from the expression register |i_CTRL-R_=| in insert mode. Similar to
+|:Bin|. E.g.
+
+    CTRL-R=BIN(42)<CR>
+
+
+==============================================================================
+MAPPINGS                                                  *change-base-mappings*
+
+In addition to the |change-base-functions| a matching set of normal mode
+mappings are also provided to change the base of existing integer literals.
+
+Note: These mappings are customizable and can be changed be setting the global
+variables described in |change-base-options|.
+
+                                                      *change-base-mappings-Hex*
+First using the change operator |c| and the inner word |iw| text object, the
+current word is yanked to the unnamed register |quotequote|. Now from insert
+mode we paste the expression register |i_CTRL-R_=| ready to evaluate an
+expression, the expression we will evaluate is a call to the |:Hex| function.
+The function parameter is determined by pasting |c_CTRL-R| the value of the
+unnamed register |quotequote|, the command is then executed <CR> and finally
+we return to normal mode |<ESC>|.
+>
+    nnoremap <leader>cbh ciw<C-r>=Dec(<C-r>")<CR><ESC>'
+<
+Note: To change this mapping see |g:change_base_map_Hex|.
+
+                                                      *change-base-mappings-HEX*
+First using the change operator |c| and the inner word |iw| text object, the
+current word is yanked to the unnamed register |quotequote|. Now from insert
+mode we paste the expression register |i_CTRL-R_=| ready to evaluate an
+expression, the expression we will evaluate is a call to the |:HEX| function.
+The function parameter is determined by pasting |c_CTRL-R| the value of the
+unnamed register |quotequote|, the command is then executed <CR> and finally
+we return to normal mode |<ESC>|.
+>
+    nnoremap <leader>cbH ciw<C-r>=Dec(<C-r>")<CR><ESC>'
+<
+Note: To change this mapping see |g:change_base_map_HEX|.
+
+                                                      *change-base-mappings-Oct*
+First using the change operator |c| and the inner word |iw| text object, the
+current word is yanked to the unnamed register |quotequote|. Now from insert
+mode we paste the expression register |i_CTRL-R_=| ready to evaluate an
+expression, the expression we will evaluate is a call to the |:Oct| function.
+The function parameter is determined by pasting |c_CTRL-R| the value of the
+unnamed register |quotequote|, the command is then executed <CR> and finally
+we return to normal mode |<ESC>|.
+>
+    nnoremap <leader>cbo ciw<C-r>=Dec(<C-r>")<CR><ESC>'
+<
+Note: To change this mapping see |g:change_base_map_Oct|.
+
+                                                      *change-base-mappings-Dec*
+First using the change operator |c| and the inner word |iw| text object, the
+current word is yanked to the unnamed register |quotequote|. Now from insert
+mode we paste the expression register |i_CTRL-R_=| ready to evaluate an
+expression, the expression we will evaluate is a call to the |:Dec| function.
+The function parameter is determined by pasting |c_CTRL-R| the value of the
+unnamed register |quotequote|, the command is then executed <CR> and finally
+we return to normal mode |<ESC>|.
+>
+    nnoremap <leader>cbd ciw<C-r>=Dec(<C-r>")<CR><ESC>'
+<
+Note: To change this mapping see |g:change_base_map_Dec|.
+
+                                                      *change-base-mappings-Bin*
+First using the change operator |c| and the inner word |iw| text object, the
+current word is yanked to the unnamed register |quotequote|. Now from insert
+mode we paste the expression register |i_CTRL-R_=| ready to evaluate an
+expression, the expression we will evaluate is a call to the |:Bin| function.
+The function parameter is determined by pasting |c_CTRL-R| the value of the
+unnamed register |quotequote|, the command is then executed <CR> and finally
+we return to normal mode |<ESC>|.
+>
+    nnoremap <leader>cbD ciw<C-r>=Dec(<C-r>")<CR><ESC>'
+<
+Note: To change this mapping see |g:change_base_map_Bin|.
+
+                                                      *change-base-mappings-BIN*
+First using the change operator |c| and the inner word |iw| text object, the
+current word is yanked to the unnamed register |quotequote|. Now from insert
+mode we paste the expression register |i_CTRL-R_=| ready to evaluate an
+expression, the expression we will evaluate is a call to the |:BIN| function.
+The function parameter is determined by pasting |c_CTRL-R| the value of the
+unnamed register |quotequote|, the command is then executed <CR> and finally
+we return to normal mode |<ESC>|.
+>
+    nnoremap <leader>cbd ciw<C-r>=Dec(<C-r>")<CR><ESC>'
+<
+Note: To change this mapping see |g:change_base_map_BIN|.
+
+==============================================================================
+OPTIONS                                                    *change-base-options*
+
+It is possible to change the default mappings described in
+|change-base-mappings| if they do not fit will with your existing Vim
+environment, this section describes the options used to override
+|change-base|'s default mappings.
+
+                                                         *g:change_base_map_Hex*
+Specifies the normal mode mapping that attempts to replace the current number
+under the cursor with its lower case hexadecimal representation. See
+|change-base-mappings-Hex|. E.g.
+>
+    let g:g:change_base_map_Hex = ',cbh'
+<
+Default: <leader>cbh
+
+                                                         *g:change_base_map_HEX*
+Specifies the normal mode mapping that attempts to replace the current number
+under the cursor with its upper case hexadecimal representation. See
+|change-base-mappings-HEX|. E.g.
+>
+    let g:g:change_base_map_HEX = ',cbH'
+<
+Default: <leader>cbH
+
+                                                         *g:change_base_map_Oct*
+Specifies the normal mode mapping that attempts to replace the current number
+under the cursor with its octal representation. See
+|change-base-mappings-Oct|. E.g.
+>
+    let g:g:change_base_map_Oct = ',cbo'
+<
+Default: <leader>cbo
+
+                                                         *g:change_base_map_Dec*
+Specifies the normal mode mapping that attempts to replace the current number
+under the cursor with its decimal representation. See
+|change-base-mappings-Dec|. E.g.
+>
+    let g:g:change_base_map_Dec = ',cbd'
+<
+Default: <leader>cbd
+
+                                                         *g:change_base_map_Bin*
+Specifies the normal mode mapping that attempts to replace the current number
+under the cursor with its lower case binary representation. See
+|change-base-mappings-Bin|. E.g.
+>
+    let g:g:change_base_map_Hex = ',cbb'
+<
+Default: <leader>cbb
+
+                                                         *g:change_base_map_BIN*
+Specifies the normal mode mapping that attempts to replace the current number
+under the cursor with its upper case binary representation. See
+|change-base-mappings-BIN|. E.g.
+>
+    let g:g:change_base_map_Hex = ',cbB'
+<
+Default: <leader>cbB
+
+                                                 *g:change_base_enable_mappings*
+All mappings can be disabled by setting this option. E.g.
+>
+    let g:change_base_enable_mappings = 0
+<
+Default: 1
+
+==============================================================================
+LICENSE                                                    *change-base-license*
+
+MIT License
+
+Copyright (c) 2016 Kenneth Benzie
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+vim:tw=78:fo=tcq2:ft=help:norl:
