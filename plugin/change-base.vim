@@ -61,21 +61,22 @@ function! s:bin(num)
   let l:index = 0
   let l:bin = ''
   while l:index < len(l:hex)
-    " We don't insert leading 0's so ignore 0.
-    if '1' == l:hex[l:index]
-      let l:bin = l:bin.'1'
+    if '0' == l:hex[l:index]
+      let l:bin = l:bin.'0000'
+    elseif '1' == l:hex[l:index]
+      let l:bin = l:bin.'0001'
     elseif '2' == l:hex[l:index]
-      let l:bin = l:bin.'10'
+      let l:bin = l:bin.'0010'
     elseif '3' == l:hex[l:index]
-      let l:bin = l:bin.'11'
+      let l:bin = l:bin.'0011'
     elseif '4' == l:hex[l:index]
-      let l:bin = l:bin.'100'
+      let l:bin = l:bin.'0100'
     elseif '5' == l:hex[l:index]
-      let l:bin = l:bin.'101'
+      let l:bin = l:bin.'0101'
     elseif '6' == l:hex[l:index]
-      let l:bin = l:bin.'110'
+      let l:bin = l:bin.'0110'
     elseif '7' == l:hex[l:index]
-      let l:bin = l:bin.'111'
+      let l:bin = l:bin.'0111'
     elseif '8' == l:hex[l:index]
       let l:bin = l:bin.'1000'
     elseif '9' == l:hex[l:index]
